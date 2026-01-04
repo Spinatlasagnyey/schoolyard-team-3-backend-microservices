@@ -1,0 +1,39 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model Design {
+  id              Int      @id @default(autoincrement())
+  rows            Int
+  cols            Int
+  backgroundImage String?  @map("background_image")
+
+  studentName     String?  @map("student_name")
+
+  class           String?  @map("class")
+
+  feedback        String?
+
+  createdAt       DateTime @default(now())
+
+  GridCell GridCell[]
+}
+
+model GridCell {
+  id              Int      @id @default(autoincrement())
+  x               Int       
+  y               Int  
+  rotation        Int  
+  assetId         Int?
+  designId        Int?
+  Design          Design?   @relation(fields: [designId], references: [id])
+  @@unique([designId, x, y])
+}
