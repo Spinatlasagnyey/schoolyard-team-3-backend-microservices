@@ -1,0 +1,22 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model Asset {
+  id              Int      @id @default(autoincrement())
+  slug            String
+  label           String
+  image_url       String
+  width           Int
+  height          Int
+  is_available    Boolean? @default(true)
+  createdAt       DateTime @default(now())
+}

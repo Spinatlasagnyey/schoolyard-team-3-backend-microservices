@@ -7,7 +7,6 @@ import { errorHandler } from './middleware/errors/errorHandler.js';
 
 
 const app = Express()
-// support json encoded and url-encoded bodies, mainly used for post and update
 app.use(Express.json());
 app.use(Express.urlencoded({ extended: true }));
 
@@ -15,13 +14,13 @@ app.use('/', IndexRouter);
 
 app.use((req: Request, res: Response, next: NextFunction) => {
   try {
-    //set header before response
     res.status(404).send('Sorry can\'t find that! Please explore more troubleshooting options.');
   } catch (err) {
     next(err);
   }
 });
 app.use(errorHandler);
+app.use("/storage", Express.static("public"));
 
 const server = app.listen(3012, () =>
   console.log(`
