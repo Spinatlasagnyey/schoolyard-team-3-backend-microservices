@@ -5,12 +5,16 @@ const router: Router = Express.Router();
 
 
 // create a proxy for each microservice
-const clientProxyMiddleware = createProxyMiddleware<Request, Response>({
+const assetProxyMiddleware = createProxyMiddleware<Request, Response>({
   target: 'http://localhost:3012/',
   changeOrigin: true
 });
-const appointmentProxyMiddleware = createProxyMiddleware<Request, Response>({
+const designProxyMiddleware = createProxyMiddleware<Request, Response>({
   target: 'http://msappointments:3011/',
+  changeOrigin: true
+});
+const laravelProxyMiddleware = createProxyMiddleware<Request, Response>({
+  target: 'http://msappointments:5173/',
   changeOrigin: true
 });
 
@@ -18,7 +22,8 @@ const appointmentProxyMiddleware = createProxyMiddleware<Request, Response>({
 // router.get('/', (req: Request, res: Response, next: NextFunction) => {
 //   res.json('hi');
 // });
-router.use('/designs', appointmentProxyMiddleware);
-router.use('/assets', clientProxyMiddleware);
+router.use('/', laravelProxyMiddleware);
+router.use('/designs', designProxyMiddleware);
+router.use('/assets', assetProxyMiddleware);
 
 export default router;
