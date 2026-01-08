@@ -10,11 +10,11 @@ const assetProxyMiddleware = createProxyMiddleware<Request, Response>({
   changeOrigin: true
 });
 const designProxyMiddleware = createProxyMiddleware<Request, Response>({
-  target: 'http://msappointments:3011/',
+  target: 'http://localhost:3011/',
   changeOrigin: true
 });
 const laravelProxyMiddleware = createProxyMiddleware<Request, Response>({
-  target: 'http://msappointments:5173/',
+  target: 'http://localhost:5173/',
   changeOrigin: true
 });
 
@@ -22,7 +22,7 @@ const laravelProxyMiddleware = createProxyMiddleware<Request, Response>({
 // router.get('/', (req: Request, res: Response, next: NextFunction) => {
 //   res.json('hi');
 // });
-router.use('/', laravelProxyMiddleware);
+router.use('/api', laravelProxyMiddleware);
 router.use('/designs', designProxyMiddleware);
 router.use('/assets', assetProxyMiddleware);
 

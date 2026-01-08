@@ -23,8 +23,8 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 });
 app.use(errorHandler);
 
-const server = app.listen(5173, () =>
+const server = app.listen(5175, () =>
   console.log(`
-🚀 Server ready at: http://localhost:5173
+🚀 Server ready at: http://localhost:5175
 ⭐️ See sample requests: https://github.com/prisma/prisma-examples/blob/latest/orm/express/README.md#using-the-rest-api`),
 )
